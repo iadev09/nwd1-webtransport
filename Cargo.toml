@@ -1,6 +1,6 @@
 [package]
 name = "nwd1-webtransport"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 description = "WebTransport (HTTP/3) transport for nwd1 binary frames."
 authors = ["ilker.arabaci@gmail.com"]
