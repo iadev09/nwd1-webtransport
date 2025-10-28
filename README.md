@@ -97,7 +97,7 @@ for await (const f of frames()) {
 }
 ```
 
-See the [example client](https://github.com/iadev09/nwd1-webtransport/tree/main/demo) for details.
+See the [example client](https://github.com/iadev09/nwd1-webtransport/tree/master/demo) for details.
 
 ---
 
