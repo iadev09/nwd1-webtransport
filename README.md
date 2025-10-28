@@ -108,12 +108,9 @@ See the [example client](https://github.com/iadev09/nwd1-webtransport/tree/main/
 - **MAGIC check:** invalid header immediately rejected
 - **Endianness:** always big‑endian (network order)
 
----ƒ
+---
 
 ## 🧱 Philosophy
-
-> “Gereksiz yükle deveye binilmez.”  
-> *— NetId64 / nwd1 design principle*
 
 `nwd1` seeks clarity over abstraction: one binary grammar, multiple carriers.  
 Server and browser share the same semantic backbone — **a single frame of meaning in motion**.
