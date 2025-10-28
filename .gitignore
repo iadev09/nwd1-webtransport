@@ -1,0 +1,28 @@
+# Build artifacts
+/target
+Cargo.lock
+
+# IDE / editor settings
+.idea/
+.vscode/
+*.iml
+
+# Neovim swap/session files
+.nvim/
+*.sw?
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.swp
+*.swo
+*.log
+
+# Test and benchmark outputs
+/tests/tmp/
+/benches/tmp/
+
+# Generated docs
+/target/doc

@@ -1,0 +1,18 @@
+[package]
+name = "nwd1-webtransport"
+version = "0.1.0"
+edition = "2024"
+description = "WebTransport (HTTP/3) transport for nwd1 binary frames."
+authors = ["ilker.arabaci@gmail.com"]
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/iadev09/nwd1-webtransport"
+keywords = ["webtransport", "http3", "quic", "frame", "protocol"]
+categories = ["network-programming"]
+
+[dependencies]
+tokio = { version = "1.41", features = ["full"] }
+bytes = "1"
+nwd1 = "0.1"
+
+[dev-dependencies]
+netid64 = "0.1"

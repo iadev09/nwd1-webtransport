@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>nwd1 WT demo</title>
+    <style>
+        #pulse {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #bbb;
+            display: inline-block;
+            transition: transform .12s, background .12s;
+        }
+
+        #pulse.beat {
+            transform: scale(1.3);
+            background: #1ac61a;
+        }
+
+        pre {
+            background: #111;
+            color: #eee;
+            padding: 12px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+<h1>nwd1 WebTransport demo</h1>
+<div>Pulse: <span id="pulse"></span> <span id="count">0</span></div>
+<pre id="log"></pre>
+
+<script type="module">
+    import {connectWT} from './nwd1-client.js';
+
+    const pulseEl = document.getElementById('pulse');
+    const countEl = document.getElementById('count');
+    const logEl = document.getElementById('log');
+
+    function pulse() {
+        pulseEl.classList.add('beat');
+        setTimeout(() => pulseEl.classList.remove('beat'), 120);
+    }
+
+    function appendLog(line) {
+        logEl.textContent += line + '\n';
+        logEl.scrollTop = logEl.scrollHeight;
+    }
+
+    // Connect (adjust URL to your WT endpoint; must be HTTPS with H3)
+    const {frames} = await connectWT('https://YOUR_DOMAIN/wt/nwd1');
+
+    let n = 0;
+    for await (const f of frames()) {
+        // Example: KIND=1 => heartbeat, KIND=2 => state snapshot, KIND=3 => event
+        if (f.kind === 1) {
+            pulse();
+        }
+        n++;
+        countEl.textContent = String(n);
+
+        // Show payload as UTF-8 if it looks like text
+        try {
+            const text = new TextDecoder().decode(f.payload);
+            appendLog(`id=${f.idBig.toString()} kind=${f.kind} ver=${f.verBig.toString()} payload="${text}"`);
+        } catch {
+            appendLog(`id=${f.idBig.toString()} kind=${f.kind} ver=${f.verBig.toString()} payload=<${f.payload.length} bytes>`);
+        }
+    }
+</script>
+</body>
+</html>
